@@ -11,7 +11,7 @@ var App = React.createClass({
   render: function() {
     return (
       <div>
-        <div className="app_header"><h2>Our App</h2></div>
+        <div className="app_header"><h2>CM Course Services Demo</h2></div>
         <CourseSearch/>
         <div className="app_footer"><span>UW-IT Student Program</span></div>
       </div>
