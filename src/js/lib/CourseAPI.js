@@ -18,13 +18,25 @@ module.exports = {
  * DELETE: http://localhost:8080/course?id=c1
 */
     deleteCourse: function(id) {
-        for (var i = 0; i < _courses.length; i++) {
-            if (_courses[i].id == id) {
-                index = i;
-                _courses.splice(index, 1);
-                break;
-            }
+  	  if(!id) {
+  		  return;;
+  	  }
+	  
+  	  var xhr = new XMLHttpRequest();
+        if (typeof xhr.overrideMimeType != 'undefined') {
+           xhr.overrideMimeType('text/xml'); // Or anything else
         }
+  	  var url = "http://localhost:8080/course?id=" + id;
+
+  	  xhr.open("DELETE", url, false);
+  	  xhr.send();
+  	  console.log(xhr.status);
+  	  console.log(xhr.statusText);
+  	 // if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+  	  if (xhr.status != 200) {
+  	     alert("REST Service DELETE call failed to:" + url);
+  	  }
+	  
     },
 
     /*
@@ -49,7 +61,7 @@ module.exports = {
 	  console.log(xhr.statusText);
 	 // if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
 	  if (xhr.status != 200) {
-	     alert("REST Service call failed to:" + url);
+	     alert("REST Service call GET failed to:" + url);
 	  }
 	 var responseText = xhr.responseText;
 	 var courses = JSON.parse(responseText);
